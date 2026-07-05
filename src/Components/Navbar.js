@@ -1,11 +1,11 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import BsNavbar from 'react-bootstrap/Navbar';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-hot-toast';
 
-function Navbarr() {
+function Navbar() {
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Navbarr() {
 
   return (
 
-    <Navbar
+    <BsNavbar
       expand="lg"
       bg="dark"
       variant="dark"
@@ -31,15 +31,15 @@ function Navbarr() {
 
       <Container>
 
-        <Navbar.Brand as={Link} to="/" className="fw-bold"> 📒 iNoteBook </Navbar.Brand>
+        <BsNavbar.Brand as={Link} to="/" className="fw-bold"> 📒 iNoteBook </BsNavbar.Brand>
 
-        <Navbar.Toggle />
+        <BsNavbar.Toggle />
 
-        <Navbar.Collapse>
+        <BsNavbar.Collapse>
 
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
 
-            {!localStorage.getItem("token") ? (  //if log out then show home and about if logged in then show profile dashboard and notes logout
+            {!localStorage.getItem("token") ? (  //if log out then show home and about if logged in then show profile dashboard and notes
 
               <>
                 <Nav.Link as={NavLink} to="/">
@@ -86,14 +86,14 @@ function Navbarr() {
 
           }
 
-        </Navbar.Collapse>
+        </BsNavbar.Collapse>
 
       </Container>
 
-    </Navbar>
+    </BsNavbar>
 
   );
 
 }
 
-export default Navbarr;
+export default Navbar;
