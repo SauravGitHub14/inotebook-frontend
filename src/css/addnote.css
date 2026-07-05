@@ -1,0 +1,253 @@
+/* ==========================================
+   Add Note Page
+========================================== */
+
+.addnote-page{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* ==========================================
+   Card
+========================================== */
+
+.addnote-card{
+
+    width:100%;
+    max-width:900px;
+
+    background:rgba(30,41,59,0.85);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+    animation:slideUp .8s ease;
+}
+
+/* ==========================================
+   Heading
+========================================== */
+
+.addnote-card h1{
+
+    text-align:center;
+
+    color:#38bdf8;
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    margin-bottom:35px;
+}
+
+.addnote-card h1::after{
+
+    content:"";
+
+    width:90px;
+
+    height:4px;
+
+    background:#2563eb;
+
+    display:block;
+
+    margin:12px auto;
+
+    border-radius:20px;
+}
+
+/* ==========================================
+   Labels
+========================================== */
+
+.addnote-card label{
+
+    color:#e2e8f0;
+
+    font-weight:600;
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+.addnote-card .form-control{
+
+    background:#334155;
+
+    color:#ffffff;
+
+    border:1px solid #475569;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    transition:.3s;
+
+    font-size:16px;
+}
+
+.addnote-card .form-control::placeholder{
+
+    color:#94a3b8;
+}
+
+/* Description Box */
+
+#description{
+
+    min-height:150px;
+
+    resize:vertical;
+}
+
+/* Focus Effect */
+
+.addnote-card .form-control:focus{
+
+    background:#3b475a;
+
+    color:white;
+
+    border-color:#38bdf8;
+
+    box-shadow:0 0 0 4px rgba(56,189,248,.18);
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+.addnote-card .btn-primary{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    background:linear-gradient(90deg,#0ea5e9,#2563eb);
+
+    transition:.35s;
+}
+
+.addnote-card .btn-primary:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(37,99,235,.45);
+}
+
+.addnote-card .btn-primary:disabled{
+
+    background:#94a3b8;
+
+    cursor:not-allowed;
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+.addnote-card{
+
+    padding:35px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.addnote-card{
+
+    padding:25px;
+
+}
+
+.addnote-card h1{
+
+    font-size:1.8rem;
+
+}
+
+#description{
+
+    min-height:120px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.addnote-page{
+
+    padding:15px;
+
+}
+
+.addnote-card{
+
+    padding:20px;
+
+}
+
+.addnote-card h1{
+
+    font-size:1.6rem;
+
+}
+
+.addnote-card .btn-primary{
+
+    font-size:16px;
+
+}
+
+}

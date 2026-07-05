@@ -1,10 +1,11 @@
+import '../css/signup.css';
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
-const Signup = ({ setIsLoggedIn }) => {
+const Signup = () => {
 
     const [credential, setCredential] = useState({ name: "", email: "", password: "", cpassword: "" });
     const [showPassword, setShowPassword] = useState(false);
@@ -12,10 +13,18 @@ const Signup = ({ setIsLoggedIn }) => {
     let navigate = useNavigate()
 
 
-    const host = "http://localhost:5000"
+    const host = process.env.REACT_APP_API_URL;
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (credential.password !== credential.cpassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+
+
         const { name, email, password } = credential;
+
         const response = await fetch(`${host}/api/auth/createuser`, {
             method: 'POST',
             headers: {
@@ -27,22 +36,19 @@ const Signup = ({ setIsLoggedIn }) => {
         const json = await response.json();
         console.log(json);
 
-        if (credential.password !== credential.cpassword) {
-            toast.error("Passwords do not match");
-            return;
-        }
+        
 
         // save the auth/ jwt-token and redirect
         if (json.success) {
             // save the auth/ jwt-token and redirect
             localStorage.setItem('token', json.authtoken);
-            setIsLoggedIn(true);
+            // setIsLoggedIn(true);
             toast.success("Account Created Successfully")
-            navigate('/')
+            navigate('/dashboard')
         }
         else {
             toast.error("Account Already Exist!")
-            navigate('/signup');
+            // navigate('/signup');
         }
     }
 
@@ -53,8 +59,38 @@ const Signup = ({ setIsLoggedIn }) => {
 
 
     return (
-        <div className=' container my-3 w-75 h-75 border border-secondary shadow-lg p-3 mb-5 bg-body rounded'>
-            <Form onSubmit={handleSubmit}>
+        // <div className='container my-3 w-50 h-50 border border-secondary shadow-lg p-3 mb-5'>
+        //     <Form onSubmit={handleSubmit}>
+        //         <h1 className='my-3'>Create an Account to use iNoteBook</h1>
+        //         <Form.Group className="mb-3" controlId="formBasicName">
+        //             <Form.Label className='d-flex'><b>Name</b></Form.Label>
+        //             <Form.Control type="text" placeholder="Enter your name" name="name" value={credential.name} onChange={onChange} required />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicEmail">
+        //             <Form.Label className='d-flex'><b>Email address</b></Form.Label>
+        //             <Form.Control type="email" placeholder="Enter email" name="email" value={credential.email} onChange={onChange} required />
+        //         </Form.Group>
+
+        //         <Form.Group className="mb-3" controlId="formBasicPassword">
+        //             <Form.Label className='d-flex'><b>Create Password</b></Form.Label>
+        //             <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" create password" name="password" value={credential.password} onChange={onChange} minLength={5} required />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicPassword">
+        //             <Form.Label className='d-flex'><b>Confirm Password</b></Form.Label>
+        //             <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" confirm password" name="cpassword" value={credential.cpassword} onChange={onChange} minLength={5} required />
+        //         </Form.Group>
+        //         <Form.Group className="mb-3" controlId="formBasicCheckbox " onClick={() => setShowPassword((prev) => !prev)}>
+        //             <Form.Check className="d-flex gap-2" type="checkbox" label="Show Password" />
+        //         </Form.Group>
+        //         <Button className="mb-5"variant="primary" type="submit">
+        //             register
+        //         </Button>
+        //     </Form>
+        //     <p className=' mt-2'>If you have already an account, please login using login button</p>
+        // </div>
+        <div className="signup-page">
+            <div className="signup-card">
+                            <Form onSubmit={handleSubmit}>
                 <h1 className='my-3'>Create an Account to use iNoteBook</h1>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label className='d-flex'><b>Name</b></Form.Label>
@@ -67,20 +103,21 @@ const Signup = ({ setIsLoggedIn }) => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className='d-flex'><b>Create Password</b></Form.Label>
-                    <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" create password" name="password" value={credential.password} onChange={onChange} minLength={5} required />
+                    <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" create a strong password" name="password" value={credential.password} onChange={onChange} minLength={5} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className='d-flex'><b>Confirm Password</b></Form.Label>
-                    <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" confirm password" name="cpassword" value={credential.cpassword} onChange={onChange} minLength={5} required />
+                    <Form.Control type={showPassword ? ("text") : ("password")} placeholder=" confirm your password" name="cpassword" value={credential.cpassword} onChange={onChange} minLength={5} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox " onClick={() => setShowPassword((prev) => !prev)}>
                     <Form.Check className="d-flex gap-2" type="checkbox" label="Show Password" />
                 </Form.Group>
-                <Button className="mb-5"variant="primary" type="submit">
-                    Signup
+                <Button className="mb-4"variant="primary" type="submit">
+                    Register
                 </Button>
             </Form>
             <p className=' mt-2'>If you have already an account, please login using login button</p>
+            </div>
         </div>
     )
 }

@@ -1,16 +1,31 @@
+import '../css/login.css'
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-hot-toast' 
+import { toast } from 'react-hot-toast'
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-const Login = ({setIsLoggedIn}) => {
+
+const Login = () => {
+
+    // console.log(setIsLoggedIn);
+    // console.log(typeof setIsLoggedIn);
+
     const [credential, setCredential] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            navigate("/");
+        }
+    }, [navigate]);
 
 
-    const host = "http://localhost:5000"
+
+    const host = process.env.REACT_APP_API_URL;
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(`${host}/api/auth/login`, {
@@ -27,11 +42,11 @@ const Login = ({setIsLoggedIn}) => {
         console.log(json);
         if (json.success) {
             // save the auth/ jwt-token and redirect
-            setIsLoggedIn(true);
+            // setIsLoggedIn(true);
             localStorage.setItem('token', json.authtoken);
-            
+
             toast.success("Logged In Successfully")
-            navigate('/')
+            navigate("/dashboard")
         }
         else {
             toast.error("Invalid Password or Username!")
@@ -45,27 +60,35 @@ const Login = ({setIsLoggedIn}) => {
 
 
     return (
-        <div className=' container my-5 w-50 h-50 border border-dark shadow-lg p-3 mb-5 bg-body rounded'>
-            <Form onSubmit={handleSubmit}>
-                <h1 className='my-5'>Login to continue to iNoteBook </h1>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label className='d-flex'>Email address</Form.Label>
-                    <Form.Control type="email" name="email" value={credential.email} placeholder="Enter email" onChange={onChange} />
-                </Form.Group>
+        <div className="login-page">
+            <div className="login-card">
+                <Form onSubmit={handleSubmit}>
+                    <h1 className='my-5'>Login to iNoteBook </h1>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label className='d-flex'>Email address</Form.Label>
+                        <Form.Control type="email" name="email" value={credential.email} placeholder="Enter email" onChange={onChange} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className='d-flex'>Password</Form.Label>
-                    <Form.Control type={showPassword ? ("text") : ("password")} name="password" value={credential.password} placeholder="Password" onChange={onChange} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox " onClick={() => setShowPassword((prev) => !prev)}>
-                    <Form.Check className="d-flex gap-2" type="checkbox" label="Show Password" />
-                </Form.Group>
-                <Button variant="primary" type="submit" >
-                    Login
-                </Button>
-            </Form>
-            <p className=' mt-5'>If you don't have an account, please signup using signup button</p>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label className='d-flex'>Password</Form.Label>
+                        <Form.Control type={showPassword ? ("text") : ("password")} name="password" value={credential.password} placeholder="Password" onChange={onChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicCheckbox " onClick={() => setShowPassword((prev) => !prev)}>
+                        <Form.Check className="d-flex gap-2" type="checkbox" label="Show Password" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" >
+                        Login
+                    </Button>
+                </Form>
+                <p className="mt-4">
+                    Don't have an account?{" "}
+                    <Link to="/signup" className="signup-link">
+                        Create one
+                    </Link>
+                </p>
+            </div>
         </div>
+
     )
 }
 

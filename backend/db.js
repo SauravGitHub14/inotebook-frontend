@@ -1,21 +1,16 @@
-const mongoose = require('mongoose');
-// const mongoURI = "mongodb://localhost:27017"
-const mongoURI = "mongodb://127.0.0.1:27017/inotebook"
+
+const mongoose = require("mongoose");
 
 const connectToMongo = async () => {
-    await mongoose.connect(mongoURI, {
-        useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    family: 4,})
-    .then( () =>  console.log("Connected to MongoDB successfully"))
-    .catch( (error) => {
-        console.log("Issuse in DB Connection");
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("✅ MongoDB Connected Successfully");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Failed");
         console.error(error.message);
         process.exit(1);
-    })
-       
-    
-}
+    }
+};
 
 module.exports = connectToMongo;
 

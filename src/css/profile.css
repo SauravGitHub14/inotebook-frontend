@@ -1,0 +1,129 @@
+.profile-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#0f172a;
+
+}
+
+.profile-card{
+
+    width:420px;
+
+    background:#1e293b;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+
+}
+
+.profile-avatar{
+
+    width:120px;
+
+    height:120px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.profile-card h2{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.profile-card p{
+
+    color:#94a3b8;
+
+}
+
+.profile-info{
+
+    margin-top:35px;
+
+    text-align:left;
+
+}
+
+.profile-info div{
+
+    background:#334155;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+}
+
+.profile-info h5{
+
+    color:#38bdf8;
+
+}
+
+.profile-info span{
+
+    color:white;
+
+}
+
+.logout-btn{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+    background:#dc2626;
+
+}

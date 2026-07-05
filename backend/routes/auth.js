@@ -6,14 +6,13 @@ const bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser')
 
-const JWT_SECRET = 'Sauravisagood$oy';
-
+const JWT_SECRET = process.env.JWT_SECRET;
 // ROUTE-1 :- create a user using : POST "/api/auth/createuser". no login required
 router.post('/createuser',
     [
         body('name', 'Enter a Valid name').isLength({ min: 3 }),
         body('email', 'Enter a valid email').isEmail(),
-        body('password', 'password must be atleast 6 character').isLength({ min: 6 }),
+        body('password', 'password must be atleast 6 character').isLength({ min: 4 }),
     ],
     async (req, res) => {
         let success = false;
