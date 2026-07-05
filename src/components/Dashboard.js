@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import "../css/dashboard.css";
-import noteContext from "../Context/notes/noteContext";
+import noteContext from "../context/notes/noteContext";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {

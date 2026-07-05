@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import noteContext from "../Context/notes/noteContext";
+import noteContext from "../context/notes/noteContext";
 
 
 const AddNote = () => {

@@ -3,7 +3,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { BsTrash, BsPencilSquare, BsEye } from "react-icons/bs";
 import { useContext } from 'react';
-import noteContext from '../Context/notes/noteContext';
+import noteContext from '../context/notes/noteContext';
 
 function NoteItem(props) {
     const context = useContext(noteContext)

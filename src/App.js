@@ -17,7 +17,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import NoteState from './Context/notes/NoteState';
+import NoteState from './context/notes/NoteState';
 
 
 const App = () => {
